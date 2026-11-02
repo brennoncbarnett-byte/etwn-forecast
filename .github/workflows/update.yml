@@ -26,11 +26,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Generate forecast artwork
+      - name: Generate branded 7-day forecast
         run: |
           python make_forecast.py
 
-      - name: Generate text-only NOAA-style forecast
+      - name: Generate text-only forecast
         run: |
           python make_text_forecast.py
 
