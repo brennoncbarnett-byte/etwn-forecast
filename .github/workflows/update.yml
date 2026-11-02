@@ -26,6 +26,45 @@ jobs:
 
       - name: Build the graphic
         run: python make_forecast.py
+        name: Update text forecast PNG
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-text-forecast:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate text forecast PNG
+        run: |
+          python make_text_forecast.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add text_forecast.png
+          git diff --cached --quiet || git commit -m "Update text forecast image"
+          git push
 
       - name: Save the new image to the repo
         run: |
