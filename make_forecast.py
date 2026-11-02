@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 CONTACT = "ETWN forecast graphic (your-email@example.com)"
 LAT, LON = 36.3134, -82.3535
-OUTPUT = "text_forecast.png"
+OUTPUT = "forecast.png"
 
 FONT_CANDIDATES = [
     "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
